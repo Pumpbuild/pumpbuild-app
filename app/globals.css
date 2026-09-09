@@ -120,6 +120,21 @@ html, body {
 
 .pb-menu-btn { display: none; }
 
+/* Remove the native up/down stepper arrows on number inputs. */
+.pb-no-spinner::-webkit-inner-spin-button,
+.pb-no-spinner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.pb-no-spinner {
+  -moz-appearance: textfield;
+}
+
+@keyframes pb-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 #features, #developers, #how-it-works, #transparency, #stats, #faq {
   scroll-margin-top: 88px;
 }
