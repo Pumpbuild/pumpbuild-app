@@ -12,6 +12,8 @@ create table if not exists builders (
   language text,
   repo text,
   repo_stars text,
+  forks text,
+  avatar_url text,
   company_name text,
   stage text,
   product_url text,
