@@ -45,7 +45,7 @@ export default function ProfilePage({ params }) {
       </Link>
 
       <div style={{ display: "flex", gap: 22, alignItems: "center", marginBottom: 10, flexWrap: "wrap" }}>
-        <Avatar name={developer.category === "founder" ? developer.company_name : developer.name} seed={developer.handle} size={72} radius={8} />
+        <Avatar name={developer.category === "founder" ? developer.company_name : developer.name} seed={developer.handle} size={72} radius={8} avatarUrl={developer.avatar_url} />
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
             <h1 className="pb-slab" style={{ fontSize: 28, fontWeight: 700 }}>{developer.name}</h1>
@@ -91,7 +91,7 @@ export default function ProfilePage({ params }) {
           <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
             <GitCommit size={16} />
             <a href={`https://github.com/${developer.handle}/${developer.repo}`} target="_blank" rel="noreferrer" style={{ fontWeight: 600, fontSize: 15 }}>{developer.repo}</a>
-            <span className="pb-mono pb-muted" style={{ fontSize: 12.5 }}>{developer.repo_stars} stars · {developer.language}</span>
+            <span className="pb-mono pb-muted" style={{ fontSize: 12.5 }}>{developer.repo_stars} stars{developer.forks ? ` · ${developer.forks} forks` : ""} · {developer.language}</span>
           </div>
         )}
       </div>
