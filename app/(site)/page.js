@@ -117,7 +117,7 @@ export default function LandingPage() {
               onClick={() => router.push(`/builders/${d.id}`)}
             >
               <span className="pb-mono pb-muted" style={{ width: 20 }}>{i + 1}</span>
-              <Avatar name={d.category === "founder" ? d.company_name : d.name} seed={d.handle} size={38} />
+              <Avatar name={d.category === "founder" ? d.company_name : d.name} seed={d.handle} size={38} avatarUrl={d.avatar_url} />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
                   <span style={{ fontWeight: 600, fontSize: 15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", minWidth: 0 }}>
