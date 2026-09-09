@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Github, GitCommit, ExternalLink, ChevronDown } from "lucide-react";
 import { XIcon } from "./icons";
 
@@ -27,8 +28,32 @@ function initialsOf(name) {
     .join("");
 }
 
-export function Avatar({ name, seed, size = 40, radius = 6 }) {
+export function Avatar({ name, seed, size = 40, radius = 6, avatarUrl }) {
+  const [imgFailed, setImgFailed] = useState(false);
   const color = AVATAR_COLORS[hashSeed(seed || name || "x") % AVATAR_COLORS.length];
+
+  if (avatarUrl && !imgFailed) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={avatarUrl}
+        alt={name || ""}
+        width={size}
+        height={size}
+        style={{
+          width: size,
+          height: size,
+          borderRadius: radius,
+          objectFit: "cover",
+          flexShrink: 0,
+          border: "1px solid var(--line)",
+          background: "var(--paper-2)",
+        }}
+        onError={() => setImgFailed(true)}
+      />
+    );
+  }
+
   return (
     <div
       style={{
@@ -200,7 +225,7 @@ export function TopThreeCard({ dev, rank, onClick }) {
   return (
     <div className="pb-box pb-row-hover" style={{ cursor: "pointer", borderColor: highlightBorder, display: "flex", alignItems: "center", gap: 14 }} onClick={onClick}>
       <RankBadge rank={rank} />
-      <Avatar name={dev.category === "founder" ? dev.company_name : dev.name} seed={dev.handle} size={40} />
+      <Avatar name={dev.category === "founder" ? dev.company_name : dev.name} seed={dev.handle} size={40} avatarUrl={dev.avatar_url} />
       <div style={{ minWidth: 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6, minWidth: 0 }}>
           <span style={{ fontWeight: 600, fontSize: 14.5, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
@@ -222,7 +247,7 @@ export function DeveloperCard({ dev, rank, onClick }) {
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12, paddingRight: 30 }}>
-        <Avatar name={dev.category === "founder" ? dev.company_name : dev.name} seed={dev.handle} size={46} />
+        <Avatar name={dev.category === "founder" ? dev.company_name : dev.name} seed={dev.handle} size={46} avatarUrl={dev.avatar_url} />
         <div style={{ minWidth: 0, flex: 1 }}>
           {dev.category === "founder" ? (
             <>
@@ -284,7 +309,7 @@ export function DeveloperCard({ dev, rank, onClick }) {
               {dev.language}
             </span>
             <span className="pb-mono pb-muted" style={{ fontSize: 11, border: "1px solid var(--line)", borderRadius: 20, padding: "3px 9px", display: "flex", alignItems: "center", gap: 5 }}>
-              <GitCommit size={11} /> {dev.repo} · {dev.repo_stars}★
+              <GitCommit size={11} /> {dev.repo} · {dev.repo_stars}★{dev.forks ? ` · ${dev.forks}⑂` : ""}
             </span>
           </>
         )}
