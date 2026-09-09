@@ -98,7 +98,7 @@ export default function AdminPage() {
           <div style={{ borderTop: "1px solid var(--line)" }}>
             {sorted.map((d) => (
               <div key={d.id} className="pb-hair" style={{ borderBottom: "1px solid", padding: "14px 4px", display: "flex", alignItems: "center", gap: 14 }}>
-                <Avatar name={d.category === "founder" ? d.company_name : d.name} seed={d.handle} size={40} />
+                <Avatar name={d.category === "founder" ? d.company_name : d.name} seed={d.handle} size={40} avatarUrl={d.avatar_url} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 0 }}>
                     <span style={{ fontWeight: 600, fontSize: 14.5, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
